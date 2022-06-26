@@ -1,12 +1,24 @@
-- hosts: localhost
-  connection: local
+--- 
+- 
   become: true
-
-  pre_tasks:
-    - name: update repositories
-      apt:
-        update_cache: yes
+  connection: local
+  hosts: localhost
+  pre_tasks: 
+    - 
+      apt: 
         changed_When: false
+        update_cache: true
+      name: "update repositories"
+
+#- hosts: localhost
+#  connection: local
+#  become: true
+
+#  pre_tasks:
+#    - name: update repositories
+#      apt:
+#        update_cache: yes
+#        changed_When: false
 
 #  tasks:
 #    - include: 
