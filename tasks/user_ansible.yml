@@ -1,0 +1,16 @@
+## Create user ansible and adding it to sudo
+- name: create user ansible
+  tags: always
+  user:
+    name: ansible
+    groups: root
+
+- name: add sudoers file for User
+  tags: always
+  copy:
+    src: files/sudoer_ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0440
+

@@ -1,0 +1,23 @@
+- name: Backup file before Copying
+  tags: backup
+  copy:
+    src: $HOME/.bashrc
+    remote_src: yes
+    dest: $HOME/.bashrc.bak
+    owner: freaky
+    group: freaky
+    mode: 0644
+
+vars:
+  myfiles:
+    - {source: "../files/bashrc", destination: "$HOME/.bashrc", permission: "0644"}
+    - {source: ../"files/tmux.conf", destination: "$HOME/.tmux.conf", permission: "0644"}
+
+- name: Copy bashrc file for color prompt and aliases
+  tags: copy
+  copy:
+    remote_src: yes
+    src: "{{ item.source }}"
+    dest: "{{ item.destination }}"
+    mode: "{{ item.permission }}"
+  with_items: "{{ myfiles }}"

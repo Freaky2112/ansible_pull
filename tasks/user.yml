@@ -1,0 +1,31 @@
+---
+
+- hosts: new
+  become: true
+  tasks:
+## hash your password with this command
+## ansible all -i localhost, -m debug -a "msg={{ 'your password' | password_hash('sha512', 'mysecretsalt') }}"
+  - name: create user ansible
+    tags: always
+    user:
+      name: ansible
+      groups: root
+
+  - name: add sudoers file for User
+    tags: always
+    copy:
+      src: sudoer_ansible
+      dest: /etc/sudoers.d/ansible
+      owner: root
+      group: root
+      mode: 0440
+
+## Uncomment if you whant to add user to sudoer file
+#  - name: Add user "xxx" to sudo
+#    lineinfile:
+#      path: /etc/sudoers.d/xxx
+#      line: 'xxx ALL=(ALL:ALL) ALL'
+#      state: present
+#      mode: 0440
+#      create: yes
+#      validate: 'visudo -cf %s'
