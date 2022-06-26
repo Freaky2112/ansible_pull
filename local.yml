@@ -1,14 +1,16 @@
---- 
-- 
+---
+
+- hosts: new
   become: true
-  connection: local
-  hosts: localhost
-  pre_tasks: 
-    - 
-      apt: 
-        changed_When: false
-        update_cache: true
-      name: "update repositories"
+  pre_tasks:
+  - name: Update Repository
+    package:
+      update_cache: yes
+
+  - name: Upgrade Distro (Debian - Ubuntu)
+    package:
+      upgrade: dist
+    when: ansible_distribution in ["Debian", "Ubuntu"]
 
 #- hosts: localhost
 #  connection: local
