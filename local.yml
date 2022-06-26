@@ -2,7 +2,7 @@
   connection: local
   become: true
 
-  pre_task
+  pre_tasks:
     - name: update repositories
       apt:
         update_cache: yes
@@ -10,6 +10,6 @@
 
   tasks:
     - include: 
-      tasks/packages.yml
-      # tasks/bash.yml
+       tasks/packages.yml
+       # tasks/bash.yml
 
