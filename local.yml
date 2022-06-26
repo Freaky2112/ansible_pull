@@ -11,5 +11,5 @@
   tasks:
     - include: 
       tasks/packages.yml
-      tasks/bash.yml
+      # tasks/bash.yml
 
